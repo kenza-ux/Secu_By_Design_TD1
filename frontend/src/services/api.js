@@ -12,4 +12,10 @@ export const loginUser = async (userData) => {
   return await api.post('/users/login', userData);
 };
 
-// TODO : Ajouter d'autres fonctions pour les films, le panier, etc.
+export const addMovie = async (movieData) => {
+  return await api.post('/movies/add', movieData);
+};
+
+export const getMovies = async () => {
+  return await api.get('/movies');
+};
