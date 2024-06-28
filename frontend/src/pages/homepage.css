@@ -1,0 +1,37 @@
+::-webkit-scrollbar {
+    width: 0px;
+  }
+  
+  .cntainer {
+    display: flex;
+    overflow-x: scroll;
+    width: 100%;
+  }
+  
+  .movies-list-wrapper {
+    flex-shrink: 0;
+  }
+  h4{
+    font-family: cursive;
+    font-weight: 700;
+    color: #ffdb3c;
+    margin-left: 25px;
+    margin-bottom: 20px;
+    text-align: start;
+  }
+
+  .carousel-item{
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 600px;
+    width: 100%;
+    background-position-y: -50px;
+    position: relative;
+  }
+
+  .top-movies-section{
+    position:absolute;
+    top:30%;
+    left:10%;
+  }
+

@@ -1,0 +1,32 @@
+.movie-container{
+    border-radius: 15px;
+    margin-left: 20px;
+    cursor: pointer;
+
+}
+
+.movie-container:hover .image{
+    width: 270px;
+    height:270px;
+
+}
+.movie-container:hover h6{
+    font-size: 20px;
+
+}
+.expanded-info{
+    display: none;
+}
+.movie-container:hover .expanded-info{
+    display: block;
+
+}
+.image{
+    transition: width 0.3s ease, height 0.3s ease;
+    width: 170px;
+    height: 170px;
+    border-radius: 15px;
+}
+.image-description-wrapper{
+    
+}

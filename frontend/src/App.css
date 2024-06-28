@@ -1,5 +1,12 @@
 .App {
   text-align: center;
+  background-image: url('https://user-images.githubusercontent.com/2388823/107261098-bf287080-69f3-11eb-829c-d8884e26b758.png');
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 800px;
+  
 }
 
 .App-logo {
