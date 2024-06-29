@@ -7,7 +7,7 @@ const HomePage = () => {
   return (
     <div className='container' style={{paddingBottom:"150px"}}>
 
-      <div id="carouselExampleIndicators" class="carousel slide mt-2"  data-bs-ride="carousel">
+      <div id="carouselExampleIndicators" class="carousel slide ride mt-2"  data-bs-ride="carousel">
   <div class="carousel-indicators">
   <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"  aria-label="Slide 1"></button>
     {bestMovies.map((movie,index)=>(
@@ -23,8 +23,8 @@ const HomePage = () => {
 </div>
   {bestMovies.map((movie,index)=>
          ( index !==0?
-            <div class="carousel-item" data-bs-interval="3000"  style={{backgroundImage:`url(${movie.image})`}} >
-
+            <div class="carousel-item" data-bs-interval="3000"  >
+                    <img src={movie.image}  className=' img-carr w-100' alt=""/>
                 
           </div>:null
         )
