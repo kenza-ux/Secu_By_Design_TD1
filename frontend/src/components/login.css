@@ -1,0 +1,15 @@
+.custom-textfield .MuiInputBase-root {
+    color: white;
+}
+.custom-textfield .MuiInputLabel-root {
+    color: white; /* Placeholder color */
+  }
+
+.custom-textfield .MuiInput-underline:before {
+    border-bottom: 1px solid gray; /* Border color before focus */
+  }
+  
+  .custom-textfield .MuiInput-underline:hover:not(.Mui-disabled):before {
+    border-bottom: 2px solid black; /* Border color on hover */
+  }
+  

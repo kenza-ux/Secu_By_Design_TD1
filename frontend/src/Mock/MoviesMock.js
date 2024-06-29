@@ -27,10 +27,10 @@
    ];
 
   export const  bestMovies = [
-    { name:"Dune",description:"",image:"https://fr.web.img4.acsta.net/pictures/24/01/26/10/18/5392835.jpg"},
     {name:"Batman Arkham Knight",description:"",image:"https://image.api.playstation.com/cdn/EP1018/CUSA00135_00/qhVdvWLcWq5DcTSeYULZ6dzv2peWp3cD.png"},
     {name:"The Godfather",description:"",image:"https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg"},
-    {name:"The Departed",description:"",image:"https://m.media-amazon.com/images/M/MV5BMTI1MTY2OTIxNV5BMl5BanBnXkFtZTYwNjQ4NjY3._V1_.jpg"},
+    { name:"Dune",description:"",image:"https://fr.web.img4.acsta.net/pictures/24/01/26/10/18/5392835.jpg"},
+    {name:"Dead Pool",description:"",image:"https://fr.web.img4.acsta.net/pictures/16/01/19/16/49/249124.jpg"},
     {name:"Pulpe Fiction",description:"",image:"https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg"},
 ]
 

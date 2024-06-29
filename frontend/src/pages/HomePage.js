@@ -17,13 +17,13 @@ const HomePage = () => {
   </div>
 
   <div class="carousel-inner">
-  <div class="carousel-item active " style={{backgroundImage:`url(${bestMovies[0].image})`}} >
+  <div class="carousel-item active " data-bs-interval="3000" style={{backgroundImage:`url(${bestMovies[0].image})`}} >
 
 
 </div>
   {bestMovies.map((movie,index)=>
          ( index !==0?
-            <div class="carousel-item" style={{backgroundImage:`url(${movie.image})`}} >
+            <div class="carousel-item" data-bs-interval="3000"  style={{backgroundImage:`url(${movie.image})`}} >
 
                 
           </div>:null
@@ -42,7 +42,7 @@ const HomePage = () => {
 </div>
 <div style={{position:"relative"}}>
     <div className='mt-5'>
-        <h4 style={{fontFamily:"cursive",color:"yellow"}}>Most Rented Movies</h4>
+        <h4 style={{fontFamily:"cursive"}}>Most Rented Movies</h4>
         <div className="cntainer">
                 {movies.map((movie,index) => (
                 index<=15?(<div className='movies-list-wrapper'>
@@ -58,7 +58,7 @@ const HomePage = () => {
 </div>
 
 <div className=' '>
-    <h4 style={{fontFamily:"cursive",color:"yellow"}}>Comedy</h4>
+    <h4 style={{fontFamily:"cursive"}}>Comedy</h4>
     <div className="cntainer">
             {movies.map((movie,index) => (
                movie.category.includes('comedy')&&(<div className='movies-list-wrapper'>
@@ -74,7 +74,7 @@ const HomePage = () => {
 
 
 <div className=' '>
-    <h4 style={{fontFamily:"cursive",color:"yellow"}}>Action</h4>
+    <h4 style={{fontFamily:"cursive"}}>Action</h4>
     <div className="cntainer">
             {movies.map((movie,index) => (
                movie.category.includes('action')&&(<div className='movies-list-wrapper'>

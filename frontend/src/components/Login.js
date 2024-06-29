@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { loginUser } from '../services/api';
+import { Button, TextField } from '@mui/material';
+import './login.css'
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -18,21 +20,34 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="Username"
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-      />
-      <button type="submit">Login</button>
-    </form>
+  <div className=' py-5  shadow' style={{width:"500px",height:"300px",marginInline:"auto",marginTop:"150px",backgroundColor:"transparent",border:"1px solid #c4c4c4"}}>
+      <form onSubmit={handleSubmit}>
+
+<div className='mx-5 px-5'>
+<TextField 
+  label="Username" 
+  variant="standard" 
+  style={{width:"300px"}}
+  className='custom-textfield'
+  onChange={(e) => setUsername(e.target.value)}  
+  value={username} />
+</div>
+
+<div className='mt-5 '>
+<TextField
+    label="password"
+    variant="standard" 
+    type="password"
+    style={{width:"300px"}}
+    value={password}
+      className='custom-textfield'
+    onChange={(e) => setPassword(e.target.value)}
+  />
+</div>
+<Button  variant="contained" className='text-white mt-5' style={{width:"300px"}}  > Sign up</Button> 
+</form>
+  </div>
+    
   );
 };
 
