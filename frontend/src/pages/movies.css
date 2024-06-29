@@ -1,0 +1,8 @@
+.movies-page-title{
+    color: var(--yellow-title);
+}
+
+.movies-wrapper{
+    border: 1px solid gray;
+    box-shadow: 1px 1px gray;
+}

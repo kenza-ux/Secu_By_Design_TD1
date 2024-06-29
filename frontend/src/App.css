@@ -8,7 +8,9 @@
   min-height: 800px;
   
 }
-
+:root{
+  --yellow-title:#ffdb3c;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

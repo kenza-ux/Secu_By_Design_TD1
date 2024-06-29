@@ -6,8 +6,8 @@
 }
 
 .movie-container:hover .image{
-    width: 270px;
-    height:270px;
+    width: 230px;
+    height:180px;
 
 }
 .movie-container:hover h6{
@@ -24,7 +24,7 @@
 }
 .image{
     transition: width 0.3s ease, height 0.3s ease;
-    width: 170px;
+    width: 200px;
     height: 170px;
     border-radius: 15px;
 }

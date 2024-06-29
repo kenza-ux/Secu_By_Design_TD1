@@ -40,7 +40,7 @@ const HomePage = () => {
     <span class="visually-hidden">Next</span>
   </button>
 </div>
-<div style={{position:"relative"}}>
+<div >
     <div className='mt-5'>
         <h4 style={{fontFamily:"cursive"}}>Most Rented Movies</h4>
         <div className="cntainer">
@@ -57,7 +57,7 @@ const HomePage = () => {
     </div>
 </div>
 
-<div className=' '>
+<div className='mt-5'>
     <h4 style={{fontFamily:"cursive"}}>Comedy</h4>
     <div className="cntainer">
             {movies.map((movie,index) => (
@@ -73,7 +73,7 @@ const HomePage = () => {
 </div>
 
 
-<div className=' '>
+<div className=' mt-5'>
     <h4 style={{fontFamily:"cursive"}}>Action</h4>
     <div className="cntainer">
             {movies.map((movie,index) => (

@@ -44,7 +44,7 @@ const Login = () => {
     onChange={(e) => setPassword(e.target.value)}
   />
 </div>
-<Button  variant="contained" className='text-white mt-5' style={{width:"300px"}}  > Sign up</Button> 
+<Button  variant="contained" className='text-white mt-5' style={{width:"300px"}}  > Sign in</Button> 
 </form>
   </div>
     
