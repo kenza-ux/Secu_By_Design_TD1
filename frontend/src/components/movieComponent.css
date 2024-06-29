@@ -20,6 +20,7 @@
 .movie-container:hover .expanded-info{
     display: block;
 
+
 }
 .image{
     transition: width 0.3s ease, height 0.3s ease;
