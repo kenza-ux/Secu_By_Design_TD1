@@ -20,6 +20,7 @@ const Login = () => {
   };
 
   return (
+  <div style={{minHeight:"100vh"}}> 
   <div className=' py-5  shadow' style={{width:"500px",height:"300px",marginInline:"auto",marginTop:"150px",backgroundColor:"transparent",border:"1px solid #c4c4c4"}}>
       <form onSubmit={handleSubmit}>
 
@@ -47,7 +48,7 @@ const Login = () => {
 <Button  variant="contained" className='text-white mt-5' style={{width:"300px"}}  > Sign in</Button> 
 </form>
   </div>
-    
+  </div> 
   );
 };
 

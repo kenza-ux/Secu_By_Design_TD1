@@ -23,7 +23,7 @@ const Login = () => {
   };
 
   return (
-  <div style={{minHeight:"700px"}}> 
+  <div style={{minHeight:"100vh"}}> 
     <div className=' py-5  shadow'  style={{width:"500px",marginInline:"auto",marginTop:"70px",backgroundColor:"transparent",border:"1px solid #c4c4c4"}}>
     <form onSubmit={handleSubmit}>
 

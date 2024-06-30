@@ -1,9 +1,51 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import MovieCompoenent from '../components/MovieCompoenent';
 import './homepage.css'
 import { movies,bestMovies } from '../Mock/MoviesMock';
+import { getMovies,getMoviesByCategorie } from '../services/api';
+import {useNavigate} from 'react-router-dom'
 const HomePage = () => {
+  const navigate = useNavigate()
+  const[loading,setLoading] = useState(true)
+  const[comedyMovies,setComedyMovies] = useState()
+  const[randomMovies,setRandomMovies] = useState()
+  const[actionMovies,setActionMovies] = useState()
+  const [carrouselMovies,setCarrouselMovies] = useState()
+  const navigateToDescription = (movie)=>{
+    navigate('/description/'+movie.title,{state:{movie}})
+  }
+  useEffect(()=>{
+    const a =async()=>{
+      try{
+    const carrouselMovie = await getMovies(getRandomInt(0,4000),5)
+    const randomMovie = await getMovies(getRandomInt(1,100),15);
+    const comedyMovie = await getMoviesByCategorie(getRandomInt(1,1000),"comedy",15);
+    const actionMovie = await getMoviesByCategorie(getRandomInt(1,1000),"action",15);
+    setCarrouselMovies(carrouselMovie.data.data)
+    setActionMovies(actionMovie.data.data)
+    setComedyMovies(comedyMovie.data.data)
+    setRandomMovies(randomMovie.data.data)
+    setLoading(false)
+    console.log("results=> ",comedyMovie.data)
+      }catch(e){
+        console.log(e)
+      }
+    } 
+    a()
+  },[])
 
+  const  getRandomInt =(min, max)=> {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  if(loading===true){
+    return(
+    <div className="d-flex align-items-center justify-content-center gap-5">
+      <h2 style={{color:"yellow",fontWeight:"bold",fontSize:"200px"}}>Loading...</h2>
+      <div class="spinner-border text-warning" role="status" style={{height:"200px",width:"200px",marginTop:"100px"}}>
+      </div>
+    </div> )
+    
+  }else
   return (
     <div className='container' style={{paddingBottom:"150px"}}>
 
@@ -17,11 +59,11 @@ const HomePage = () => {
   </div>
 
   <div class="carousel-inner">
-  <div class="carousel-item active " data-bs-interval="3000" style={{backgroundImage:`url(${bestMovies[0].image})`}} >
+  <div class="carousel-item active " data-bs-interval="3000" style={{backgroundImage:`url(${carrouselMovies[0].image})`}} >
 
 
 </div>
-  {bestMovies.map((movie,index)=>
+  {carrouselMovies.map((movie,index)=>
          ( index !==0?
             <div class="carousel-item" data-bs-interval="3000"  >
                     <img src={movie.image}  className=' img-carr w-100' alt=""/>
@@ -44,11 +86,15 @@ const HomePage = () => {
     <div className='mt-5'>
         <h4 style={{fontFamily:"cursive"}}>Most Rented Movies</h4>
         <div className="cntainer">
-                {movies.map((movie,index) => (
+                {randomMovies.map((movie,index) => (
                 index<=15?(<div className='movies-list-wrapper'>
                         <MovieCompoenent className="card"  
-                        name={movie.name}
-                        image={movie.image}/>
+                        navigateToDescription ={()=>navigateToDescription(movie)}  
+                        name={movie.title}
+                        image={movie.image}
+                        year={movie.date.split("-")[0]}
+                        vote={movie.vote_average}  
+                        />
                     </div>):null
                     
                 ))}
@@ -60,11 +106,16 @@ const HomePage = () => {
 <div className='mt-5'>
     <h4 style={{fontFamily:"cursive"}}>Comedy</h4>
     <div className="cntainer">
-            {movies.map((movie,index) => (
-               movie.category.includes('comedy')&&(<div className='movies-list-wrapper'>
-                    <MovieCompoenent className="card"  
-                    name={movie.name}
-                    image={movie.image}/>
+            {comedyMovies.map((movie,index) => (
+               index<=15 &&(<div className='movies-list-wrapper'>
+                    <MovieCompoenent className="card"
+                    navigateToDescription ={()=>navigateToDescription(movie)}  
+                    name={movie.title}
+                    image={movie.image}
+                    year={movie.date.split("-")[0]}
+                    vote={movie.vote_average} 
+                      
+                    />
                 </div>)
                 
             ))}
@@ -76,11 +127,15 @@ const HomePage = () => {
 <div className=' mt-5'>
     <h4 style={{fontFamily:"cursive"}}>Action</h4>
     <div className="cntainer">
-            {movies.map((movie,index) => (
-               movie.category.includes('action')&&(<div className='movies-list-wrapper'>
+            {actionMovies.map((movie,index) => (
+              index<=15 && (<div className='movies-list-wrapper'>
                     <MovieCompoenent className="card"  
-                    name={movie.name}
-                    image={movie.image}/>
+                    navigateToDescription ={()=>navigateToDescription(movie)}  
+                    name={movie.title}
+                    image={movie.image}
+                    year={movie.date.split("-")[0]}
+                    vote={movie.vote_average}  
+                    />
                 </div>)
                 
             ))}

@@ -1,8 +1,10 @@
 import React from 'react'
 import './movieComponent.css'
+import { FaStar } from "react-icons/fa";
 const MovieCompoenent = (props) => {
+
   return (
-    <div className='movie-container ' >
+    <div className='movie-container ' onClick={props.navigateToDescription} >
       <div className='image-description-wrapper'>
       <img src={props.image} alt='' className='image'/>
         <div className='description'>
@@ -10,9 +12,12 @@ const MovieCompoenent = (props) => {
           <div>
             <div className='text-white text-start expanded-info'>
               <div className='d-flex justify-content-between align-items-center'>
-              <h6 className='text-info '>  2010</h6>
-              <h6 className='text-success '> 1h50 </h6>
-              </div>
+              <h6 className='text-info '>  {props.year}</h6>
+             <div className='d-flex gap-2 align-items-start'>
+               <FaStar className='fs-5'  style={{color:"yellow"}}/>
+               <h6 className='text-success '> {props.vote.toFixed(2)} </h6>
+              </div> 
+            </div>
 
             </div>
           </div>
