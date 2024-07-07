@@ -1,9 +1,20 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { Link, json } from 'react-router-dom';
 import './header.css'
 import {Button} from '@mui/material'
 import { useNavigate } from 'react-router-dom';
+import { useRefresh } from '../global/refreshContext';
+import { SlBasket } from "react-icons/sl";
+
 const Header = () => {
+  const { refresh } = useRefresh();
+   const [tokenAndName,setTokenAndName] = useState(null)
+  useEffect(() => {
+    const userCredentials =localStorage.getItem('movie-rental-cred')
+setTokenAndName(JSON.parse(userCredentials))
+    console.log(tokenAndName)
+  },[refresh])
+
     const  navigate = useNavigate();
   return (
 <nav class="navbar navbar-expand-lg navbar-light container "style={{backgroundColor:"transparent"}}>
@@ -20,10 +31,14 @@ const Header = () => {
         <Link to="/ajouter" class="nav-link  active" style={{color:"white"}}>About</Link> 
         </div>
        <input type="text" class="form-control mt-lg-0 mt-sm-3 ms-sm-2" id="search" placeholder="search  for a movie" style={{height:"30px",width:"400px"}}/>
-       <div className='d-sm-flex align-items-center gap-2'>
+      {tokenAndName==null?(<div className='d-sm-flex align-items-center gap-2'>
        <Button  variant="contained" className='text-white mt-sm-3 mt-lg-0' style={{cursor:"pointer"}} onClick={()=>navigate('/login')}> Login</Button>
        <Button  variant="outlined" className='text-white mt-sm-3 mt-lg-0'  style={{cursor:"pointer"}} onClick={()=>navigate('/register')} > Sign up</Button> 
-       </div>
+       </div>):(<div className='d-sm-flex align-items-center gap-4'>
+       <h6  style={{color:"#a19f9f",padding:"8px",fontSize:"16px",border:"1px solid #471b53",borderRadius:"15px",fontFamily:"cursive"}} className='  mt-sm-3 mt-lg-1' > {tokenAndName.name}</h6>
+       <Button  variant="contained" className='text-white mt-sm-3 mt-lg-0'  style={{cursor:"pointer"}} onClick={()=>setTokenAndName(null)}> Logout</Button> 
+       <SlBasket className='fs-3' style={{color:"var(--yellow-title)",cursor:"pointer"}}/>
+       </div>)} 
        
 
 

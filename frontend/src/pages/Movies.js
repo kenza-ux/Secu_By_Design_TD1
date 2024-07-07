@@ -4,11 +4,14 @@ import { movies as moviesData } from '../Mock/MoviesMock';
 import MoviesCard from '../components/MoviesCard';
 import { getMovies } from '../services/api';
 import {useNavigate} from 'react-router-dom'
+import { Autocomplete, TextField } from '@mui/material';
 const Movies = () => {
     const navigate =useNavigate()
     const [query, setQuery] = useState('');
     const [filteredMovies, setFilteredMovies] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [pages,setPages] = useState()
+    let index=1
     const handleChange = (e) => {
         const value = e.target.value.toLowerCase();
         setQuery(value);
@@ -22,8 +25,9 @@ const Movies = () => {
         const fetchMovies = async () => {
             setLoading(true);
             try {
-                const response = await getMovies(1, 24);
+                const response = await getMovies(index, 24);
                 setFilteredMovies(response.data.data);
+                setPages(response.data)
                 setLoading(false);
             } catch (e) {
                 console.error(e);
@@ -49,6 +53,14 @@ const Movies = () => {
             <div className='movies-wrapper py-4 px-3'>
                 <div className='movie-wrapper-header text-white py-3'>
                     <div className="d-flex align-items-center gap-5 justify-content-end">
+                    <Autocomplete
+                        disablePortal
+                        id="combo-box-demo"
+                        options={pages}
+                        sx={{ width: 300 }}
+                        renderInput={(params) => 
+                        <TextField {...params} label="Movie" />}
+/>
                         <input
                             type="text"
                             className='form-control w-25'

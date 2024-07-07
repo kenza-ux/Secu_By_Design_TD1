@@ -5,11 +5,11 @@ const api = axios.create({
 });
 
 export const registerUser = async (userData) => {
-  return await api.post('/users/register', userData);
+  return await api.post('user/register', userData);
 };
 
 export const loginUser = async (userData) => {
-  return await api.post('/users/login', userData);
+  return await api.post('/user/login', userData);
 };
 
 export const addMovie = async (movieData) => {

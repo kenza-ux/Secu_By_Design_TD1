@@ -53,7 +53,7 @@ const Movie = sequelize.define('Movie', {
   },
 }, {
   tableName: 'movies',
-  timestamps: false, // assuming your table doesn't have `createdAt` and `updatedAt` fields
+  timestamps: false, 
 });
 
 module.exports = Movie;

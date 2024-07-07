@@ -1,26 +1,47 @@
 import React, { useState } from 'react';
-import { loginUser } from '../services/api';
+import { registerUser } from '../services/api';
 import { Button, TextField } from '@mui/material';
 import './login.css'
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [firstname, setFirstname] = useState('');
-  const [lastname, setLastname] = useState('');
-  const [retypepassword, setRetypePassword] = useState('');
+const [registerForm,setRegisterForm] = useState({
+  firstname:"",
+  lastname:"",
+  username:"",
+  password:"",
+})
+let [isPasswordMatch,setIsPasswordMatch] = useState(true)
+let retypePassword
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await loginUser({ username, password });
-      console.log(response.data);
+      //const response = await loginUser(registerForm);
+      if(registerForm.password!==retypePassword){
+        console.log("password does not match",retypePassword)
+      }
+      else {
+        const response =  await registerUser({
+          username:registerForm.username,
+          firstname:registerForm.lastname,
+          lastname:registerForm.lastname,
+          password:registerForm.password
+        })
+        console.log(response)
+      }
       // Stocker le token JWT localement
-      localStorage.setItem('token', response.data.token);
+      
     } catch (error) {
       console.error(error);
     }
   };
+
+  const handleChange = (e)=>{
+     setRegisterForm({
+      ...registerForm,
+      [e.target.name] : e.target.value
+     })
+  }
 
   return (
   <div style={{minHeight:"100vh"}}> 
@@ -30,55 +51,56 @@ const Login = () => {
 <div className=''>
   <TextField 
   label="firstname" 
+  name='firstname'
   variant="standard" 
   style={{width:"300px"}}
   className='custom-textfield'
-  onChange={(e) => setFirstname(e.target.value)}  
-  value={firstname} />
+  onChange={(e) => handleChange(e)}   />
 </div>
 <div className='mt-5'>
   <TextField 
   label="lastname" 
+  name='lastname'
   variant="standard" 
   style={{width:"300px"}}
   className='custom-textfield'
-  onChange={(e) => setLastname(e.target.value)}  
-  value={lastname} />
+  onChange={(e) => handleChange(e)}   />
 </div>
 <div className='mt-5'>
 <TextField 
 label="email" 
+name="username"
 type='email'
 variant="standard" 
 style={{width:"300px"}}
 className='custom-textfield'
-onChange={(e) => setUsername(e.target.value)}  
-value={username} />
+onChange={(e) => handleChange(e)}  />
 </div>
 
 <div className='mt-5 '>
 <TextField
   label="password"
   variant="standard" 
+  name="password"
   type="password"
   style={{width:"300px"}}
-  value={password}
-    className='custom-textfield'
-  onChange={(e) => setPassword(e.target.value)}
+  className='custom-textfield'
+  onChange={(e) => handleChange(e)}
 />
 </div>
 <div className='mt-5 '>
+{ isPasswordMatch===false && (<h6 className='text-danger'> password is not the same </h6>)} 
 <TextField
   label="retype password"
   variant="standard" 
+  name="retypePassword"
   type="password"
   style={{width:"300px"}}
-  value={retypepassword}
-    className='custom-textfield'
-  onChange={(e) => setRetypePassword(e.target.value)}
+  className='custom-textfield'
+  onChange={(e) => retypePassword = e.target.value}
 />
 </div>
-<Button  variant="contained" className='text-white mt-5' style={{width:"300px"}}  > Sign in</Button> 
+<Button  variant="contained" className='text-white mt-5' style={{width:"300px"}} type='submit' > Sign in</Button> 
 </form>
 </div>
 </div>   

@@ -1,14 +1,9 @@
 const sequelize = require('./config/database');
-const Movie = require('./models/movie');
+const User = require('./models/user');
 
 const testConnection = async () => {
   try {
-    await Movie.sync()
-    const moviesList = await Movie.findAll({
-      limit: 10
-    });
-    console.log('Movies:', moviesList);
-    
+    await User.sync()  
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   } finally {

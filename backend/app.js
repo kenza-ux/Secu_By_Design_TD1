@@ -6,6 +6,7 @@ const PORT = 9000;
 const Movies= require('./models/movie')
 const {Op} = require('sequelize')
 const movieRoutes = require('./routes/MovieRoutes')
+const userRoutes = require('./routes/userRoutes')
 app.use(express.json());
 app.use(cors())
 app.get('/', (req, res) => {
@@ -14,7 +15,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/movies',movieRoutes)
 
-
+app.use('/api/user',userRoutes)
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

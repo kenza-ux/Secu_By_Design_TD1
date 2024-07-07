@@ -11,6 +11,8 @@
     "cors": "^2.8.5",
     "csurf": "^1.11.0",
     "debug": "~2.6.9",
+    "dot-env": "^0.0.1",
+    "dotenv": "^16.4.5",
     "express": "~4.16.1",
     "express-validator": "^7.1.0",
     "helmet": "^7.1.0",

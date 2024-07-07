@@ -6,10 +6,11 @@ import DescriptionPage from './pages/DescriptionPage';
 import Login from './components/Login';
 import Movies from './pages/Movies';
 import Register from './components/Register'
-
+import { RefreshProvider } from './global/refreshContext';
 const RoutesConfig = () => {
     return (
         <BrowserRouter>
+                <RefreshProvider>
             <div className="App">
                 <Header />
                 <Routes>
@@ -20,6 +21,7 @@ const RoutesConfig = () => {
                     <Route path="/register" element={<Register/>}/>
                 </Routes>
             </div>
+            </RefreshProvider>
         </BrowserRouter>
     );
 };
