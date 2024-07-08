@@ -12,12 +12,19 @@ export const loginUser = async (userData) => {
   return await api.post('/user/login', userData);
 };
 
-export const addMovie = async (movieData) => {
-  return await api.post('/movies/add', movieData);
+export const rentMovie = async (userId,movieId) => {
+  return await api.get('/user/rent_movie?user='+userId+'&movie='+movieId);
+};
+
+export const checkMovieRented = async (userId,movieId) => {
+  return await api.get('/user/movie_rented?user='+userId+'&movie='+movieId);
 };
 
 export const getMovies = async (page,limit=15) => {
   return await api.get('/movies/'+page+"?limit="+limit);
+};
+export const getUserRentedMovies = async (userId) => {
+  return await api.get('/user/movies/'+userId);
 };
 
 export const getMoviesByCategorie = async (page,categorie,limit=15) => {

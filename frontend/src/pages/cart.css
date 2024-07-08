@@ -1,0 +1,14 @@
+.rented-movie-card-info div :first-child{
+    color:gray;
+    font-weight: 700;
+    font-family: sans-serif;
+
+}
+
+.rented-movie-card-info div :not(:first-child){
+    color:var(--yellow-title);
+    font-weight: 500;
+    font-family: sans-serif;
+
+
+}

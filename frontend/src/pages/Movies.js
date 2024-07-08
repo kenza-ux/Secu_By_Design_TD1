@@ -53,14 +53,7 @@ const Movies = () => {
             <div className='movies-wrapper py-4 px-3'>
                 <div className='movie-wrapper-header text-white py-3'>
                     <div className="d-flex align-items-center gap-5 justify-content-end">
-                    <Autocomplete
-                        disablePortal
-                        id="combo-box-demo"
-                        options={pages}
-                        sx={{ width: 300 }}
-                        renderInput={(params) => 
-                        <TextField {...params} label="Movie" />}
-/>
+
                         <input
                             type="text"
                             className='form-control w-25'

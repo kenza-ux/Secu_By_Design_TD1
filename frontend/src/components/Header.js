@@ -4,14 +4,18 @@ import './header.css'
 import {Button} from '@mui/material'
 import { useNavigate } from 'react-router-dom';
 import { useRefresh } from '../global/refreshContext';
-import { SlBasket } from "react-icons/sl";
+import { BsCart4 } from "react-icons/bs";
+
+
 
 const Header = () => {
   const { refresh } = useRefresh();
+  const [userId,setUserId]=useState();
    const [tokenAndName,setTokenAndName] = useState(null)
   useEffect(() => {
     const userCredentials =localStorage.getItem('movie-rental-cred')
-setTokenAndName(JSON.parse(userCredentials))
+    setUserId(localStorage.getItem('movie-rental-user-id'))
+    setTokenAndName(JSON.parse(userCredentials))
     console.log(tokenAndName)
   },[refresh])
 
@@ -36,8 +40,12 @@ setTokenAndName(JSON.parse(userCredentials))
        <Button  variant="outlined" className='text-white mt-sm-3 mt-lg-0'  style={{cursor:"pointer"}} onClick={()=>navigate('/register')} > Sign up</Button> 
        </div>):(<div className='d-sm-flex align-items-center gap-4'>
        <h6  style={{color:"#a19f9f",padding:"8px",fontSize:"16px",border:"1px solid #471b53",borderRadius:"15px",fontFamily:"cursive"}} className='  mt-sm-3 mt-lg-1' > {tokenAndName.name}</h6>
-       <Button  variant="contained" className='text-white mt-sm-3 mt-lg-0'  style={{cursor:"pointer"}} onClick={()=>setTokenAndName(null)}> Logout</Button> 
-       <SlBasket className='fs-3' style={{color:"var(--yellow-title)",cursor:"pointer"}}/>
+       <Button  variant="contained" className='text-white mt-sm-3 mt-lg-0'  style={{cursor:"pointer"}} onClick={()=>{
+        setTokenAndName(null)
+        localStorage.removeItem('movie-rental-user-id')
+        navigate('/')
+       }}> Logout</Button> 
+       <BsCart4 className='fs-3' style={{color:"var(--yellow-title)",cursor:"pointer"}} onClick={()=>{navigate('/user/cart',{state:{userId:userId}})}}/>
        </div>)} 
        
 
