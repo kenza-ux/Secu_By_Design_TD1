@@ -19,6 +19,8 @@ const Cart = () => {
     }
     userRentedMovies()
   },[])
+
+
   return (
     <div className='container mt-5 pb-5'>
       <h1 style={{color:"var(--yellow-title)"}} className='mb-5'>Rented movies</h1>

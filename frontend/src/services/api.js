@@ -23,6 +23,9 @@ export const checkMovieRented = async (userId,movieId) => {
 export const getMovies = async (page,limit=15) => {
   return await api.get('/movies/'+page+"?limit="+limit);
 };
+export const searchMovie = async (title) => {
+  return await api.get('/movies/search/title?title='+title);
+};
 export const getUserRentedMovies = async (userId) => {
   return await api.get('/user/movies/'+userId);
 };

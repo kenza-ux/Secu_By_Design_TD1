@@ -54,4 +54,40 @@ try{
     }
   }
 
-  module.exports={getMovieByCategorie,getMovies}
+
+  const searchMovieByName = async (req, res) => {
+    try {
+      const page =req.params.page || 1
+      const title = req.query.title;
+
+
+      if (!title) {
+        return res.status(400).json({ error: 'title query parameter is required' });
+      }
+  
+      const limit = req.query.limit |15;
+      const offset = (page - 1) * limit;
+  
+      const movies = await Movies.findAndCountAll({
+        where: {
+          title: {
+            [Op.like]: `%${title}%`
+          }
+        },
+        limit,
+        offset
+      });
+      res.json({
+        total: movies.count,
+        pages: Math.ceil(movies.count / limit),
+        currentPage: page,
+        data: movies.rows
+      });
+    }
+    catch(e){
+      console.log(e)
+      res.status(500).json({message:"error",e})
+    }
+  }
+
+  module.exports={getMovieByCategorie,getMovies,searchMovieByName}

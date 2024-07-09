@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react';
 import './movies.css';
 import { movies as moviesData } from '../Mock/MoviesMock';
 import MoviesCard from '../components/MoviesCard';
-import { getMovies } from '../services/api';
+import { getMovies,searchMovie} from '../services/api';
 import {useNavigate} from 'react-router-dom'
-import { Autocomplete, TextField } from '@mui/material';
+import { Autocomplete, Button, TextField } from '@mui/material';
 const Movies = () => {
     const navigate =useNavigate()
     const [query, setQuery] = useState('');
     const [filteredMovies, setFilteredMovies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [pages,setPages] = useState()
+    const [refresh,setRefresh] = useState(false)
     let index=1
     const handleChange = (e) => {
         const value = e.target.value.toLowerCase();
@@ -35,8 +36,22 @@ const Movies = () => {
             }
         };
         fetchMovies();
-    }, []);
+    }, [refresh]);
 
+    const search = async()=>{
+        let value = document.getElementById('search-movie').value
+        if(value.length!==0){
+            console.log(value)
+            setLoading(true)
+           const searchedResults = await searchMovie(value)
+           setFilteredMovies(searchedResults.data.data)
+           setLoading(false)
+
+        }
+        else {
+            setRefresh(!refresh)
+        }
+    }
     if (loading) {
         return (
             <div className="d-flex align-items-center justify-content-center gap-5">
@@ -52,15 +67,15 @@ const Movies = () => {
             <h3 className='movies-page-title'>ALL Available Movies</h3>
             <div className='movies-wrapper py-4 px-3'>
                 <div className='movie-wrapper-header text-white py-3'>
-                    <div className="d-flex align-items-center gap-5 justify-content-end">
+                    <div className="d-flex align-items-center gap-3 justify-content-end">
 
                         <input
+                            id="search-movie"
                             type="text"
                             className='form-control w-25'
                             placeholder='Type to search a movie'
-                            value={query}
-                            onChange={handleChange}
                         />
+                        <div onClick={search}><Button variant="contained">search</Button></div> 
                     </div>
                 </div>
                 <div className='movie-wrapper-body'>
