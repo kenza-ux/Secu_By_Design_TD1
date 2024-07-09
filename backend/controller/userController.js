@@ -3,7 +3,8 @@ const {cryptPassword,isPasswordMatches} = require('../utils/helperFunctions')
 const os = require('os')
 const {generateToken} = require('../utils/jwtHelper')
 const Movie = require('../models/movie')
-const { Result } = require('express-validator')
+const {MODE} = require('../../application_mode')
+const sequelize = require('../config/database')
 
 
 const registerUser = async(req,res)=>{
@@ -11,53 +12,60 @@ const registerUser = async(req,res)=>{
     console.log("username here=>",username)
     const userFound = await userByUsername(username)
     if(userFound===null){
-        console.log("this is the found username =>",userFound)
         const user = req.body
-        user.password = await  cryptPassword(user.password)
+        if(MODE==='safe') user.password = await  cryptPassword(user.password)
         const a = (await User.create(user))
         res.json(user)
     }
     else {
-        console.log("this is the found username =>",userFound)
         res.status(400).json({
             msg:"user already exist",
             success:false
         })
     }
 }
+
+const tokenInfo  = (user)=>{
+  return { 
+    id:user?.id,
+    username:user.username,
+    firstname:user.firstname,
+    lastname:user.lastname,}
+}
 const login = async (req,res)=>{
     let {username,password} = req.body
-    console.log(password)
     let userFound = await userByUsername(username)
     if(userFound){
+      let tkn =  generateToken(userFound) 
+      const response = {
+        token:tkn,
+        name:userFound.firstname+" "+userFound.lastname,
+        id:userFound.id
+      }
         if( await isPasswordMatches(password,userFound.password)){
-            let tkn =    generateToken({
-                id:userFound?.id,
-                username:userFound.username,
-                firstname:userFound.firstname,
-                lastname:userFound.lastname,
-            }) 
-            res.json({
-                token:tkn,
-                name:userFound.firstname+" "+userFound.lastname,
-                id:userFound.id
-            })
+           return  res.json(response)
         }
         else {
-            res.status(400).json({message:"passwords does not match"})
+          if(password === userFound.password){
+           return  res.json(response)
+          }
+
+            else  return res.status(400).json({message:"passwords does not match"})
         }
     }
     else {
-        res.status(400).json({message:`no user with ${username} found`})
+       return  res.status(400).json({message:`no user with ${username} found`})
     }
 }
+
+
+
 
 const getUserRentedMovies = async (req, res) => {
     const userId = req.params.id;
     let rentedMoviesList = [];
   
     try {
-      // Finding user from the database using pk
       const user = await User.findByPk(userId);
       console.log("user=>", user);
       const moviesRentedString = user.movies_rented;
@@ -117,7 +125,6 @@ const getAllUsers = async (req,res)=>{
         res.status(500).json({message:"somethig went wrong try again later"})
     }
    
-     
 }
 
 const addMovieToUser=async(req,res)=>{
