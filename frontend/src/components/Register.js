@@ -2,37 +2,50 @@ import React, { useState } from 'react';
 import { registerUser } from '../services/api';
 import { Button, TextField } from '@mui/material';
 import './login.css'
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+const [isUsernameExist,setIsUsernameExist]=useState(false)
 const [registerForm,setRegisterForm] = useState({
   firstname:"",
   lastname:"",
   username:"",
   password:"",
 })
+const navigate = useNavigate()
 let [isPasswordMatch,setIsPasswordMatch] = useState(true)
 let retypePassword
 
   const handleSubmit = async (e) => {
+    setIsPasswordMatch(true)
     e.preventDefault();
+    setIsUsernameExist(false)
+    let response
     try {
       //const response = await loginUser(registerForm);
       if(registerForm.password!==retypePassword){
         console.log("password does not match",retypePassword)
+        setIsPasswordMatch(false)
       }
       else {
-        const response =  await registerUser({
+         response =  await registerUser({
           username:registerForm.username,
           firstname:registerForm.lastname,
           lastname:registerForm.lastname,
           password:registerForm.password
         })
+        if(response.status===200){
+          navigate('/login')
+        }
         console.log(response)
       }
       // Stocker le token JWT localement
       
     } catch (error) {
-      console.error(error);
+      if(error.response.status===400){
+        setIsUsernameExist(true)
+      }
+      console.error("erreuuur",error);
     }
   };
 
@@ -46,6 +59,7 @@ let retypePassword
   return (
   <div style={{minHeight:"100vh"}}> 
     <div className=' py-5  shadow'  style={{width:"500px",marginInline:"auto",marginTop:"70px",backgroundColor:"transparent",border:"1px solid #c4c4c4"}}>
+     
     <form onSubmit={handleSubmit}>
 
 <div className=''>
@@ -67,6 +81,7 @@ let retypePassword
   onChange={(e) => handleChange(e)}   />
 </div>
 <div className='mt-5'>
+{ isUsernameExist===true && (<h6 className='text-danger'> a user with this email already exist </h6>)} 
 <TextField 
 label="email" 
 name="username"
