@@ -26,6 +26,11 @@ const User = sequelize.define('User', {
   movies_rented:{
     type: DataTypes.STRING,
     allowNull: true
+  },
+  role:{
+    type:DataTypes.STRING,
+    defaultValue:"user",
+    allowNull:false
   }
 },{tableName:"users",
   timestamps:false,

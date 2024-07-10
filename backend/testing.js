@@ -3,7 +3,7 @@ const User = require('./models/user');
 
 const testConnection = async () => {
   try {
-    await User.sync()  
+    await User.sync({alter:true})  
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   } finally {

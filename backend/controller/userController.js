@@ -30,10 +30,13 @@ const tokenInfo  = (user)=>{
     id:user?.id,
     username:user.username,
     firstname:user.firstname,
-    lastname:user.lastname,}
+    lastname:user.lastname,
+    role:user.role
+  }
 }
 const login = async (req,res)=>{
     let {username,password} = req.body
+    console.log('////////////////',MODE)
     let userFound = await userByUsername(username)
     if(userFound){
       let tkn =  generateToken(userFound) 
@@ -57,6 +60,32 @@ const login = async (req,res)=>{
        return  res.status(400).json({message:`no user with ${username} found`})
     }
 }
+
+
+const loginUnsafe = async (req,res)=>{
+  let {username,password} = req.body
+  let [userFound,metadata] =[]
+  try{
+    console.log("/////////////////////////////")
+    [userFound,metadata]  = await sequelize.query("select * from users where username="+username+" and password="+password)
+  }
+  catch(e){
+    console.log(e)
+  }
+  if(userFound){
+    let tkn =  generateToken(userFound[0]) 
+    const response = {
+      token:tkn,
+      name:userFound[0].firstname+" "+userFound[0].lastname,
+      id:userFound[0].id
+    }
+  return res.status(200).json(response);
+  }
+  else {
+     return  res.status(400).json({message:`no user with ${username} found`})
+  }
+}
+
 
 
 
@@ -201,5 +230,6 @@ module.exports={
     getAllUsers,
     addMovieToUser,
     getUserRentedMovies,
+    loginUnsafe,
     isMovieRented
 }

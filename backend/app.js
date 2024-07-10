@@ -21,7 +21,7 @@ const limiter = rateLimit({
   message: 'Too many requests from this IP, please try again later.'
 });
 
-app.use(limiter);
+if(MODE==='safe')app.use(limiter);
 
 app.get('/', async(req, res) => {
   console.log(MODE)
