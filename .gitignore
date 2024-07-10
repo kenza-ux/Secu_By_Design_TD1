@@ -52,11 +52,7 @@ node_modules/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+
 
 # Parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -68,10 +64,9 @@ node_modules/
 # Nuxt.js build / generate output
 .nuxt
 dist
-
+movies_db.sqlite
 # Gatsby files
 .cache/
-public
 
 # vuepress build output
 .vuepress/dist

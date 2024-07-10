@@ -36,7 +36,6 @@ const tokenInfo  = (user)=>{
 }
 const login = async (req,res)=>{
     let {username,password} = req.body
-    console.log('////////////////',MODE)
     let userFound = await userByUsername(username)
     if(userFound){
       let tkn =  generateToken(userFound) 
@@ -66,12 +65,13 @@ const loginUnsafe = async (req,res)=>{
   let {username,password} = req.body
   let [userFound,metadata] =[]
   try{
-    console.log("/////////////////////////////")
     [userFound,metadata]  = await sequelize.query("select * from users where username="+username+" and password="+password)
   }
   catch(e){
     console.log(e)
   }
+
+  console.log("this is the userfound",userFound[0].firstname+" "+userFound[0].lastname)
   if(userFound){
     let tkn =  generateToken(userFound[0]) 
     const response = {
