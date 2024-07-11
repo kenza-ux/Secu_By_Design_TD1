@@ -34,7 +34,7 @@ const Header = () => {
         <div className='d-lg-flex gap-2'>
         <Link to="/" class="nav-link  active" style={{color:"white"}}>Home</Link> 
         <Link to="/allMovies" class="nav-link  active" style={{color:"white"}}>All Movies</Link> 
-        <Link to="/ajouter" class="nav-link  active" style={{color:"white"}}>About</Link> 
+        <Link to="/about" class="nav-link  active" style={{color:"white"}}>About</Link> 
         {role==='admin' && (<Link to="/admin" class="nav-link  active" style={{color:"white"}}>Admin Panel</Link>) }
         </div>
        <input type="text" class="form-control mt-lg-0 mt-sm-3 ms-sm-2" id="search" placeholder="search  for a movie" style={{height:"30px",width:"400px"}}/>
