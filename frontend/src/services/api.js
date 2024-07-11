@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+let AuthorizationToken = JSON.parse(localStorage.getItem('movie-rental-cred')).token || ''
 const api = axios.create({
   baseURL: 'http://localhost:9000/api',
 });
@@ -13,7 +14,7 @@ export const loginUser = async (userData) => {
 };
 
 export const rentMovie = async (userId,movieId) => {
-  return await api.get('/user/rent_movie?user='+userId+'&movie='+movieId);
+  return await api.get('/user/rent_movie?user='+userId+'&movie='+movieId,{headers:{'Authorization': `Bearer ${AuthorizationToken}`}});
 };
 
 export const checkMovieRented = async (userId,movieId) => {
@@ -27,7 +28,11 @@ export const searchMovie = async (title) => {
   return await api.get('/movies/search/title?title='+title);
 };
 export const getUserRentedMovies = async (userId) => {
-  return await api.get('/user/movies/'+userId);
+  return await api.get('/user/movies/'+userId,{headers:{'Authorization': `Bearer ${AuthorizationToken}`}});
+};
+
+export const adminPage = async () => {
+  return await api.get('/user/admin',{headers:{'Authorization': `Bearer ${AuthorizationToken}`}});
 };
 
 export const getMoviesByCategorie = async (page,categorie,limit=15) => {

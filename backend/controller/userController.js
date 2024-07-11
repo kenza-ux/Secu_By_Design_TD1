@@ -42,7 +42,8 @@ const login = async (req,res)=>{
       const response = {
         token:tkn,
         name:userFound.firstname+" "+userFound.lastname,
-        id:userFound.id
+        id:userFound.id,
+        role:userFound.role
       }
         if( await isPasswordMatches(password,userFound.password)){
            return  res.json(response)
@@ -71,13 +72,13 @@ const loginUnsafe = async (req,res)=>{
     console.log(e)
   }
 
-  console.log("this is the userfound",userFound[0].firstname+" "+userFound[0].lastname)
-  if(userFound){
+  if(userFound.length>0){
     let tkn =  generateToken(userFound[0]) 
     const response = {
       token:tkn,
       name:userFound[0].firstname+" "+userFound[0].lastname,
-      id:userFound[0].id
+      id:userFound[0].id,
+      role:userFound[0].role
     }
   return res.status(200).json(response);
   }

@@ -14,13 +14,13 @@ const isAuthenticated= async (req,res,next)=>{
         }    
         }
         else{
-            return res.status(400).json({
+            return res.status(403).json({
                message:"authetication error" 
             })
     }
     }
     else {
-        return res.status(400).json({
+        return res.status(401).json({
             message:"no authorization header found"
         })
     } 

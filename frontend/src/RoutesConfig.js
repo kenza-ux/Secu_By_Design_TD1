@@ -8,6 +8,7 @@ import Movies from './pages/Movies';
 import Register from './components/Register'
 import { RefreshProvider } from './global/refreshContext';
 import Cart from './pages/Cart';
+import AdminPanel from './pages/AdminPanel';
 const RoutesConfig = () => {
     return (
         <BrowserRouter>
@@ -21,6 +22,7 @@ const RoutesConfig = () => {
                     <Route path="/allMovies" element={<Movies/>}/>
                     <Route path="/user/cart" element={<Cart/>}/>
                     <Route path="/register" element={<Register/>}/>
+                    <Route path="/admin" element={<AdminPanel/>}/>
                 </Routes>
             </div>
             </RefreshProvider>

@@ -12,10 +12,12 @@ const Header = () => {
   const { refresh } = useRefresh();
   const [userId,setUserId]=useState();
    const [tokenAndName,setTokenAndName] = useState(null)
+   const [role,setRole] =useState('')
   useEffect(() => {
     const userCredentials =localStorage.getItem('movie-rental-cred')
     setUserId(localStorage.getItem('movie-rental-user-id'))
     setTokenAndName(JSON.parse(userCredentials))
+    setRole(localStorage.getItem('role')|| '')
     console.log(tokenAndName)
   },[refresh])
 
@@ -33,6 +35,7 @@ const Header = () => {
         <Link to="/" class="nav-link  active" style={{color:"white"}}>Home</Link> 
         <Link to="/allMovies" class="nav-link  active" style={{color:"white"}}>All Movies</Link> 
         <Link to="/ajouter" class="nav-link  active" style={{color:"white"}}>About</Link> 
+        {role==='admin' && (<Link to="/admin" class="nav-link  active" style={{color:"white"}}>Admin Panel</Link>) }
         </div>
        <input type="text" class="form-control mt-lg-0 mt-sm-3 ms-sm-2" id="search" placeholder="search  for a movie" style={{height:"30px",width:"400px"}}/>
       {tokenAndName==null?(<div className='d-sm-flex align-items-center gap-2'>
@@ -43,6 +46,12 @@ const Header = () => {
        <Button  variant="contained" className='text-white mt-sm-3 mt-lg-0'  style={{cursor:"pointer"}} onClick={()=>{
         setTokenAndName(null)
         localStorage.removeItem('movie-rental-user-id')
+        localStorage.removeItem('movie-rental-cred')
+        localStorage.removeItem('role')
+        setTokenAndName(null)
+        setUserId(null)
+        setRole(null)
+
         navigate('/')
        }}> Logout</Button> 
        <BsCart4 className='fs-3' style={{color:"var(--yellow-title)",cursor:"pointer"}} onClick={()=>{navigate('/user/cart',{state:{userId:userId}})}}/>

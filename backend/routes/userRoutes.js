@@ -13,9 +13,12 @@ const { isAuthenticated, isAdmin } = require('../midleware/securityMidleWare');
 const { MODE } = require('../../application_mode');
 router.post('/register',registerUser)
 MODE==='safe'?router.post('/login',login):router.post('/login',loginUnsafe)
-router.get('/rent_movie',addMovieToUser)
-router.get('/movies/:id',getUserRentedMovies)
+router.get('/rent_movie',isAuthenticated,addMovieToUser)
+router.get('/movies/:id',isAuthenticated,getUserRentedMovies)
 router.get('/movie_rented',isMovieRented)
-router.get('/admin',isAuthenticated,(req,res)=>{res.status(200).json({message:"admin pannel"})})
+
+MODE==='safe'?
+router.get('/admin',isAuthenticated,isAdmin,(req,res)=>{res.status(200).json({message:"admin pannel en cours de devloppement"})})
+:router.get('/admin',isAuthenticated,(req,res)=>{res.status(200).json({message:"admin pannel en cours de devloppement"})})
 
 module.exports = router

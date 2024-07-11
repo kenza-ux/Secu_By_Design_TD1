@@ -19,6 +19,7 @@ const Login = () => {
       console.log(response.data);
       localStorage.setItem('movie-rental-cred', JSON.stringify({token:response.data.token,name:response.data.name}));
       localStorage.setItem('movie-rental-user-id', response.data.id);
+      localStorage.setItem('role', response.data.role);
       setErrorMessage(false)
       handleRefresh()
       navigate('/')
