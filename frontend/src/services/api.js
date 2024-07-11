@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-let AuthorizationToken = JSON.parse(localStorage.getItem('movie-rental-cred')).token || ''
+let AuthorizationToken = JSON.parse(localStorage.getItem('movie-rental-cred'))?.token || ''
 const api = axios.create({
   baseURL: 'http://localhost:9000/api',
 });
