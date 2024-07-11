@@ -1,3 +1,3 @@
-const MODE='safe'
+const MODE='unsafe'
 
 module.exports={MODE}

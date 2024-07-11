@@ -67,12 +67,8 @@ const loginUnsafe = async (req,res)=>{
   let [userFound,metadata] =[]
   try{
     [userFound,metadata]  = await sequelize.query("select * from users where username="+username+" and password="+password)
-  }
-  catch(e){
-    console.log(e)
-  }
-
-  if(userFound.length>0){
+    
+  if( userFound && userFound.length>0){
     let tkn =  generateToken(userFound[0]) 
     const response = {
       token:tkn,
@@ -85,6 +81,13 @@ const loginUnsafe = async (req,res)=>{
   else {
      return  res.status(400).json({message:`no user with ${username} found`})
   }
+  }
+  catch(e){
+    console.log("dkhel hnaaaa")
+    await login(req,res)
+    console.log(e)
+  }
+
 }
 
 
